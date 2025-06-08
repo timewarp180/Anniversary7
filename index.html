@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 7th Anniversary!</title>
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #ff8e8e;
+            --accent: #ffd3d3;
+            --dark: #4a4a4a;
+            --light: #fff9f9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.7;
+        }
+        
+        /* Envelope Section */
+        #envelope-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: transform 1s ease-in-out;
+        }
+        
+        .envelope {
+            width: 90vmin;
+            height: 60vmin;
+            position: relative;
+            cursor: pointer;
+            max-width: 800px;
+            max-height: 500px;
+        }
+        
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #e0a6a6;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            z-index: 1;
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #e8b3b3;
+            border-radius: 10px;
+            transform-origin: top;
+            transition: transform 0.8s ease;
+            clip-path: polygon(0 0, 100% 0, 50% 50%);
+            box-shadow: var(--shadow);
+            z-index: 3;
+        }
+        
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+        
+        .envelope-content {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .envelope-content h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        /* Letter Section */
+        #letter-section {
+            display: none;
+            min-height: 100vh;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .letter-container {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            margin: 2rem auto;
+        }
+        
+        .letter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .letter-header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+        
+        .letter-header p {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-top: 0.5rem;
+        }
+        
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            padding: 1rem;
+        }
+        
+        .letter-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .letter-signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+        
+        .section-header h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--dark);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Photo Collage */
+        .collage-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .collage-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            aspect-ratio: 1/1;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .collage-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .collage-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--primary);
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -13px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -13px;
+        }
+        
+        /* Interactive Heart */
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .heart {
+            width: 200px;
+            height: 200px;
+            background-color: var(--primary);
+            position: relative;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            box-shadow: 0 0 40px rgba(255, 107, 107, 0.6);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        .heart:hover {
+            transform: rotate(-45deg) scale(1.1);
+            box-shadow: 0 0 50px rgba(255, 107, 107, 0.8);
+        }
+        
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 200px;
+            height: 200px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart::before {
+            top: -100px;
+            left: 0;
+        }
+        
+        .heart::after {
+            top: 0;
+            left: 100px;
+        }
+        
+        .reason-display {
+            text-align: center;
+            min-height: 100px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            font-size: 1.2rem;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Interactive Map */
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .world-map {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-pin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            cursor: pointer;
+        }
+        
+        .map-pin::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: white;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            border-radius: 50%;
+        }
+        
+        .pin-info {
+            position: absolute;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            min-width: 150px;
+            transform: translateX(-50%);
+            display: none;
+        }
+        
+        /* Bucket List */
+        .bucket-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .bucket-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+        }
+        
+        .bucket-checkbox {
+            margin-right: 15px;
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--accent);
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .bucket-checkbox.checked {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Love Meter */
+        .love-meter-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        
+        .meter {
+            width: 100%;
+            height: 30px;
+            background: var(--accent);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .meter-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 2s ease;
+        }
+        
+        .meter-result {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        
+        /* 7 Lessons */
+        .lessons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .lesson-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .lesson-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .lesson-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Scrapbook */
+        .scrapbook {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            min-height: 600px;
+            margin: 0 auto;
+            background: #f9e9cd;
+            border: 20px solid #d4b483;
+            box-shadow: var(--shadow);
+            padding: 40px;
+        }
+        
+        .tape {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 10;
+            transform: rotate(-20deg);
+        }
+        
+        .scrapbook-photo {
+            position: absolute;
+            border: 10px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .scrapbook-photo:hover {
+            transform: scale(1.05) rotate(2deg);
+            z-index: 5;
+        }
+        
+        .scrapbook-note {
+            position: absolute;
+            background: #fffde8;
+            padding: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transform: rotate(-3deg);
+        }
+        
+        /* Confetti Button */
+        .confetti-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            margin: 2rem 0;
+        }
+        
+        .confetti-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+        
+        /* Countdown */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .countdown-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 18px !important;
+            }
+            
+            .envelope {
+                width: 90%;
+                height: 70vmin;
+            }
+            
+            .collage-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+        
+        /* Animations */
+        @keyframes heartbeat {
+            0% { transform: rotate(-45deg) scale(1); }
+            5% { transform: rotate(-45deg) scale(1.1); }
+            10% { transform: rotate(-45deg) scale(1); }
+            15% { transform: rotate(-45deg) scale(1.1); }
+            20% { transform: rotate(-45deg) scale(1); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cursor Trails -->
+    <div id="cursor-trails"></div>
+    
+    <!-- Envelope Section -->
+    <section id="envelope-section">
+        <div class="envelope floating">
+            <div class="envelope-back"></div>
+            <div class="envelope-content">
+                <h1>Click to Open Our 7th Anniversary Letter</h1>
+            </div>
+            <div class="envelope-flap"></div>
+        </div>
+    </section>
+    
+    <!-- Letter Section -->
+    <section id="letter-section" class="hidden">
+        <div class="letter-container">
+            <div class="letter-header">
+                <h1>To My Dearest Bibi Baby,</h1>
+                <p>On Our 7th Anniversary</p>
+            </div>
+            <div class="letter-content">
+                <p>My dearest Baby,</p>
+                
+                <p>As I sit down to write this letter on our 7th anniversary, my heart is filled with so much love and gratitude for you. These past seven years have been the most incredible journey of my life, and I cherish every single moment we've shared together.</p>
+                
+                <p>From our first nervous date to building a life together, every step has been magical because I've taken it with you. You've brought more joy, laughter, and meaning to my life than I ever thought possible. Your kindness, your strength, your beautiful spirit - these are just a few of the countless reasons why I fall more in love with you every day.</p>
+                
+                <p>Remember our first trip together? How nervous we were? Now we've created so many beautiful memories traveling the world hand in hand. And all those quiet evenings at home, just being together - those moments mean just as much to me as our grand adventures.</p>
+                
+                <p>You've seen me at my best and at my worst, and you've loved me through it all. Your unwavering support has given me the courage to chase my dreams, and your love has given me a safe harbor to return to. With you, I've learned that true love isn't about perfection - it's about choosing each other, every single day, through all of life's ups and downs.</p>
+                
+                <p>As we celebrate seven wonderful years together, I find myself more certain than ever that you are my soulmate, my partner, and my best friend. I look forward to all the anniversaries to come, to growing old with you, and to continuing this beautiful journey we've started together.</p>
+                
+                <p>Thank you for seven amazing years of love, laughter, and happiness. Here's to us, to our love, and to forever.</p>
+                
+                <p>With all my love,</p>
+            </div>
+            <div class="letter-signature">
+                Forever Yours
+            </div>
+        </div>
+    </section>
+    
+    <!-- Photo Collage -->
+    <section id="photo-collage" class="hidden">
+        <div class="section-header">
+            <h2>Our Memories</h2>
+            <p>A collection of special moments from our 7 years together</p>
+        </div>
+        <div class="collage-container">
+            <!-- Photos will be added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Timeline -->
+    <section id="timeline-section" class="hidden">
+        <div class="section-header">
+            <h2>Our Journey</h2>
+            <p>Key moments in our beautiful 7-year relationship</p>
+        </div>
+        <div class="timeline">
+            <!-- Timeline items will be added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Interactive Heart -->
+    <section id="heart-section" class="hidden">
+        <div class="section-header">
+            <h2>Reasons I Love You</h2>
+            <p>Click the heart to discover why you mean the world to me</p>
+        </div>
+        <div class="heart-container">
+            <div class="heart" id="interactive-heart"></div>
+        </div>
+        <div class="reason-display" id="reason-display">
+            Click the heart to see a reason
+        </div>
+    </section>
+    
+    <!-- Interactive Map -->
+    <section id="map-section" class="hidden">
+        <div class="section-header">
+            <h2>Our Adventures</h2>
+            <p>Places we've visited and dreams we'll fulfill together</p>
+        </div>
+        <div class="map-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg" alt="World Map" class="world-map">
+            <!-- Map pins will be added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Bucket List -->
+    <section id="bucket-list" class="hidden">
+        <div class="section-header">
+            <h2>Our Future Dreams</h2>
+            <p>Things we'll do together in the years to come</p>
+        </div>
+        <div class="bucket-list">
+            <!-- Bucket list items will be added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Love Meter -->
+    <section id="love-meter" class="hidden">
+        <div class="section-header">
+            <h2>Our Compatibility</h2>
+            <p>Measuring the magic of us together</p>
+        </div>
+        <div class="love-meter-container">
+            <button id="test-love" class="confetti-btn">Test Our Love</button>
+            <div class="meter">
+                <div class="meter-fill" id="meter-fill"></div>
+            </div>
+            <div class="meter-result" id="meter-result">100%</div>
+        </div>
+    </section>
+    
+    <!-- 7 Lessons -->
+    <section id="lessons-section" class="hidden">
+        <div class="section-header">
+            <h2>7 Lessons in 7 Years</h2>
+            <p>What our journey together has taught me about love</p>
+        </div>
+        <div class="lessons-container">
+            <!-- Lessons will be added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Confetti Button -->
+    <section id="confetti-section" class="hidden">
+        <div class="section-header">
+            <h2>Celebrate Us!</h2>
+            <p>Let's shower our love with virtual confetti</p>
+        </div>
+        <button id="confetti-btn" class="confetti-btn">Launch Confetti Cannon!</button>
+    </section>
+    
+    <!-- Scrapbook -->
+    <section id="scrapbook-section" class="hidden">
+        <div class="section-header">
+            <h2>Our Virtual Scrapbook</h2>
+            <p>A collection of precious moments and memories</p>
+        </div>
+        <div class="scrapbook">
+            <!-- Scrapbook items will be added by JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Countdown -->
+    <section id="countdown-section" class="hidden">
+        <div class="section-header">
+            <h2>Until Our Next Anniversary</h2>
+            <p>Counting down to 8 amazing years together</p>
+        </div>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">365</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">24</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">60</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">60</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modal for Photos -->
+    <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Data for the website
+        const data = {
+            photos: Array(30).fill().map((_, i) => `photo/photo${i + 1}.jpg`),
+            
+            timeline: [
+                { date: "Sept 2018", title: "The First Date", description: "Our journey began at that cozy little café." },
+                { date: "Oct 2018", title: "First Eat Together", description: "Weekend getaway to the Streetyard. first eat out together - No extra rice because we're shy. HAHAHAHA " },
+                { date: "June 2019", title: "First Anniversary", description: "Celebrated one amazing year with a romantic Lunch at mcdo HAHAHAHA" },
+                { date: "February 2020", title: "Survived Lockdown", description: "Our love grew stronger through challenging times." },
+
+                { date: "July 2023", title: "First Salary at BOTEJYU", description: "Surprise weekend trip to BOTEJYU Baby's Favorite where we order too much and filled our stomach with joy." },
+                { date: "September 2023", title: "Baby at 1000 ROSES", description: "Me and baby at 1000 ROSES." },
+
+                { date: "July 2024", title: "Baby Survived Nursing", description: "After years of hardships and struggle! Baby Graduated at CDU as baby Nurse!" },
+                { date: "November 2024", title: "Baby Licensed Registered Nurse", description: "Baby is now Licensed Registered Nurse, road to making millions" },
+                { date: "January 2025", title: "Adopted Pebbles", description: "Our furry baby joined the family and filled our home with joy." },
+                { date: "June 2025", title: "Adopted Pabblo And Pepper", description: "Additonal hamshter babies to the family. More memories to come with the 3 hamshters." }
+            ],
+            
+            reasons: [
+                "Your smile brightens my darkest days",
+                "The way you care for others inspires me",
+                "Your laugh is my favorite sound in the world",
+                "You make me want to be a better person",
+                "Your strength through challenges amazes me",
+                "How you always know what I need before I do",
+                "The way you look at me makes me feel loved",
+                "Your passion for life is contagious",
+                "You accept me completely, flaws and all",
+                "Our quiet moments together mean everything",
+                "Your kindness to strangers shows your beautiful heart",
+                "How you make ordinary moments extraordinary",
+                "Your intelligence and curiosity fascinate me",
+                "The comfort I feel when I'm with you",
+                "You believe in me even when I doubt myself",
+                "How we can talk for hours or sit in comfortable silence",
+                "Your beautiful soul that shines through everything you do",
+                "The future looks brighter because you're in it",
+                "How you've changed my life for the better",
+                "Simply because you're you"
+            ],
+            
+            mapLocations: [
+                { top: '70%', left: '95%', name: 'New Zealand, Aukland ', description: 'Future home plan' },
+                { top: '25%', left: '50%', name: 'Rome, Italy', description: 'Foods Italian Pasta, Gelatismo ice cream!' },
+                { top: '35%', left: '45%', name: 'Barcelona, Spain', description: 'Future Trips!' },
+                { top: '40%', left: '83%', name: 'Philippines', description: 'Starting Point!' },
+                { top: '60%', left: '85%', name: 'Sydney, Australia', description: 'Dream destination Alternative home for healthcare' },
+                { top: '30%', left: '86%', name: 'Tokyo, Japan', description: 'Future adventure we\'re planning' }
+            ],
+            
+            bucketList: [
+                "Going to Japan shopping spree, eat japan foods, ramen, wagyu!",
+                "Travel to italy, Eat their unique pasta",
+                "Sky Diving",
+                "Go on a hot air balloon ride",
+                "Adopt another pet",
+                "Build our dream home",
+                "Visit all seven continents",
+                "Build a bunker together",
+                "Volunteer abroad",
+                "Renew our vows on a beach"
+            ],
+            
+            lessons: [
+                { title: "Love is a Choice", description: "True love isn't just a feeling - it's a daily decision to choose each other, even on difficult days." },
+                { title: "Communication is Everything", description: "The most important conversations are often the hardest ones to start, but they strengthen our bond." },
+                { title: "Laughter Heals", description: "Finding humor in tough situations has carried us through challenges and brought us closer." },
+                { title: "Growth is Essential", description: "We've learned to grow together while still nurturing our individual journeys." },
+                { title: "Patience is a Virtue", description: "Understanding that we're both works in progress has taught us the beauty of patience." },
+                { title: "Small Gestures Matter", description: "It's not the grand gestures but the daily acts of love that build a lasting relationship." },
+                { title: "Teamwork Makes the Dream Work", description: "Facing life as partners rather than individuals has made us unstoppable." }
+            ]
+        };
+        
+        // DOM Elements
+        const envelopeSection = document.getElementById('envelope-section');
+        const envelope = document.querySelector('.envelope');
+        const letterSection = document.getElementById('letter-section');
+        const sections = document.querySelectorAll('section');
+        const cursorTrails = document.getElementById('cursor-trails');
+        const collageContainer = document.querySelector('.collage-container');
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-image');
+        const closeModal = document.querySelector('.close-modal');
+        const timelineContainer = document.querySelector('.timeline');
+        const heart = document.getElementById('interactive-heart');
+        const reasonDisplay = document.getElementById('reason-display');
+        const mapContainer = document.querySelector('.map-container');
+        const bucketListContainer = document.querySelector('.bucket-list');
+        const loveTestBtn = document.getElementById('test-love');
+        const meterFill = document.getElementById('meter-fill');
+        const meterResult = document.getElementById('meter-result');
+        const lessonsContainer = document.querySelector('.lessons-container');
+        const scrapbook = document.querySelector('.scrapbook');
+        const confettiBtn = document.getElementById('confetti-btn');
+        const countdownDays = document.getElementById('days');
+        const countdownHours = document.getElementById('hours');
+        const countdownMinutes = document.getElementById('minutes');
+        const countdownSeconds = document.getElementById('seconds');
+        
+        // Initialize the website
+        function init() {
+            // Set up envelope interaction
+            envelope.addEventListener('click', openEnvelope);
+            
+            // Set up cursor trails
+            document.addEventListener('mousemove', createCursorTrail);
+            
+            // Create photo collage
+            createPhotoCollage();
+            
+            // Create timeline
+            createTimeline();
+            
+            // Set up interactive heart
+            heart.addEventListener('click', showRandomReason);
+            
+            // Create map pins
+            createMapPins();
+            
+            // Create bucket list
+            createBucketList();
+            
+            // Set up love meter
+            loveTestBtn.addEventListener('click', testLove);
+            
+            // Create 7 lessons
+            createLessons();
+            
+            // Create scrapbook
+            createScrapbook();
+            
+            // Set up confetti button
+            confettiBtn.addEventListener('click', launchConfetti);
+            
+            // Start countdown
+            startCountdown();
+            
+            // Initialize scroll animations
+            initScrollAnimations();
+        }
+        
+        // Open envelope animation
+        function openEnvelope() {
+            envelope.classList.add('open');
+            
+            setTimeout(() => {
+                envelopeSection.style.display = 'none';
+                letterSection.classList.remove('hidden');
+                
+                // Show all other sections after a delay
+                setTimeout(() => {
+                    document.querySelectorAll('.hidden').forEach(section => {
+                        section.classList.remove('hidden');
+                    });
+                }, 1000);
+            }, 1000);
+        }
+        
+        // Create cursor trail effect
+        function createCursorTrail(e) {
+            const trail = document.createElement('div');
+            trail.classList.add('cursor-trail');
+            trail.style.left = (e.pageX - 10) + 'px';
+            trail.style.top = (e.pageY - 10) + 'px';
+            
+            // Random heart icon
+            const heartIcon = document.createElement('i');
+            heartIcon.classList.add('fas', 'fa-heart');
+            heartIcon.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            heartIcon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            
+            trail.appendChild(heartIcon);
+            cursorTrails.appendChild(trail);
+            
+            // Remove trail after animation
+            setTimeout(() => {
+                trail.remove();
+            }, 1000);
+        }
+        
+        // Create photo collage
+        function createPhotoCollage() {
+            data.photos.forEach(photo => {
+                const item = document.createElement('div');
+                item.classList.add('collage-item', 'fade-in');
+                
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = "Our memory";
+                
+                img.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                    modalImg.src = photo.replace('blur=2', 'blur=0');
+                });
+                
+                item.appendChild(img);
+                collageContainer.appendChild(item);
+            });
+        }
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        // Create timeline
+        function createTimeline() {
+            data.timeline.forEach((item, index) => {
+                const timelineItem = document.createElement('div');
+                timelineItem.classList.add('timeline-item', 'fade-in');
+                
+                const content = document.createElement('div');
+                content.classList.add('timeline-content');
+                
+                const date = document.createElement('div');
+                date.classList.add('timeline-date');
+                date.textContent = item.date;
+                
+                const title = document.createElement('h3');
+                title.textContent = item.title;
+                
+                const description = document.createElement('p');
+                description.textContent = item.description;
+                
+                content.appendChild(date);
+                content.appendChild(title);
+                content.appendChild(description);
+                timelineItem.appendChild(content);
+                timelineContainer.appendChild(timelineItem);
+            });
+        }
+        
+        // Show random reason when heart is clicked
+        function showRandomReason() {
+            const randomIndex = Math.floor(Math.random() * data.reasons.length);
+            reasonDisplay.textContent = data.reasons[randomIndex];
+            reasonDisplay.classList.add('fade-in');
+            
+            // Remove animation class after it completes
+            setTimeout(() => {
+                reasonDisplay.classList.remove('fade-in');
+            }, 1000);
+        }
+        
+        // Create map pins
+        function createMapPins() {
+            data.mapLocations.forEach(location => {
+                const pin = document.createElement('div');
+                pin.classList.add('map-pin');
+                pin.style.top = location.top;
+                pin.style.left = location.left;
+                
+                const info = document.createElement('div');
+                info.classList.add('pin-info');
+                info.innerHTML = `<strong>${location.name}</strong><br>${location.description}`;
+                
+                pin.addEventListener('mouseover', () => {
+                    info.style.display = 'block';
+                    info.style.top = `calc(${location.top} - 100px)`;
+                    info.style.left = location.left;
+                });
+                
+                pin.addEventListener('mouseout', () => {
+                    info.style.display = 'none';
+                });
+                
+                pin.appendChild(info);
+                mapContainer.appendChild(pin);
+            });
+        }
+        
+        // Create bucket list
+        function createBucketList() {
+            data.bucketList.forEach(item => {
+                const listItem = document.createElement('div');
+                listItem.classList.add('bucket-item', 'fade-in');
+                
+                const checkbox = document.createElement('div');
+                checkbox.classList.add('bucket-checkbox');
+                
+                checkbox.addEventListener('click', () => {
+                    checkbox.classList.toggle('checked');
+                    if (checkbox.classList.contains('checked')) {
+                        checkbox.innerHTML = '<i class="fas fa-check"></i>';
+                    } else {
+                        checkbox.innerHTML = '';
+                    }
+                });
+                
+                const text = document.createElement('div');
+                text.classList.add('bucket-text');
+                text.textContent = item;
+                
+                listItem.appendChild(checkbox);
+                listItem.appendChild(text);
+                bucketListContainer.appendChild(listItem);
+            });
+        }
+        
+        // Test love compatibility
+        function testLove() {
+            // Reset
+            meterFill.style.transform = 'scaleX(0)';
+            meterResult.style.opacity = '0';
+            
+            // Fake loading animation
+            setTimeout(() => {
+                meterFill.style.transform = 'scaleX(1)';
+                
+                setTimeout(() => {
+                    meterResult.style.opacity = '1';
+                    // Always 100%!
+                    launchConfetti();
+                }, 2000);
+            }, 100);
+        }
+        
+        // Create lessons
+        function createLessons() {
+            data.lessons.forEach((lesson, index) => {
+                const card = document.createElement('div');
+                card.classList.add('lesson-card', 'fade-in');
+                
+                const number = document.createElement('div');
+                number.classList.add('lesson-number');
+                number.textContent = index + 1;
+                
+                const title = document.createElement('h3');
+                title.classList.add('lesson-title');
+                title.textContent = lesson.title;
+                
+                const description = document.createElement('p');
+                description.textContent = lesson.description;
+                
+                card.appendChild(number);
+                card.appendChild(title);
+                card.appendChild(description);
+                lessonsContainer.appendChild(card);
+            });
+        }
+        
+        // Create scrapbook
+        function createScrapbook() {
+            // Add tape
+            const tape1 = document.createElement('div');
+            tape1.classList.add('tape');
+            tape1.style.top = '10%';
+            tape1.style.left = '30%';
+            scrapbook.appendChild(tape1);
+            
+            const tape2 = document.createElement('div');
+            tape2.classList.add('tape');
+            tape2.style.top = '70%';
+            tape2.style.left = '60%';
+            scrapbook.appendChild(tape2);
+            
+            // Add photos
+            for (let i = 0; i < 6; i++) {
+                const photo = document.createElement('img');
+                photo.classList.add('scrapbook-photo');
+                photo.src = `photo/pic${i + 1}.jpg`;
+                photo.width = 200;
+                photo.height = 300;
+
+                
+                // Random positioning
+                photo.style.top = `${10 + Math.random() * 60}%`;
+                photo.style.left = `${10 + Math.random() * 60}%`;
+                photo.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+                
+                photo.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                    modalImg.src = photo.src.replace('300', '600');
+                });
+                
+                scrapbook.appendChild(photo);
+            }
+         
+            // Add notes
+            const note1 = document.createElement('div');
+            note1.classList.add('scrapbook-note');
+            note1.style.top = '25%';
+            note1.style.left = '15%';
+            note1.innerHTML = 'Our Dates With Baby<br>Pandemic - Present';
+            scrapbook.appendChild(note1);
+            
+            const note2 = document.createElement('div');
+            note2.classList.add('scrapbook-note');
+            note2.style.top = '65%';
+            note2.style.left = '70%';
+            note2.innerHTML = 'Our Babies!<br>Pebbles, Pepper and Pabblo';
+            scrapbook.appendChild(note2);
+        }
+        
+        // Launch confetti
+        function launchConfetti() {
+            confetti({
+                particleCount: 300,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
+            
+            // Hearts confetti
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    spread: 70,
+                    origin: { x: 0.3, y: 0.6 },
+                    shapes: ['heart']
+                });
+                
+                confetti({
+                    particleCount: 50,
+                    spread: 70,
+                    origin: { x: 0.7, y: 0.6 },
+                    shapes: ['heart']
+                });
+            }, 300);
+        }
+        
+        // Start countdown to next anniversary
+        function startCountdown() {
+            const now = new Date();
+            const nextAnniversary = new Date(now.getFullYear() + 1, 5, 7); // June 7th next year
+            
+            // If this year's anniversary hasn't happened yet
+            if (now.getMonth() < 5 || (now.getMonth() === 5 && now.getDate() < 7)) {
+                nextAnniversary.setFullYear(now.getFullYear());
+            }
+            
+            function updateCountdown() {
+                const now = new Date();
+                const diff = nextAnniversary - now;
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                countdownDays.textContent = days;
+                countdownHours.textContent = hours;
+                countdownMinutes.textContent = minutes;
+                countdownSeconds.textContent = seconds;
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        // Initialize scroll animations
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Initialize the website when loaded
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
